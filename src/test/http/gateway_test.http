@@ -1,0 +1,8 @@
+### Direct request to microservice
+GET http://localhost:8081/myservice/hello
+
+### Request through Gateway
+# The prefix `simple-microservice` must be the same as 
+# the application name in application.yml of the microservice
+GET http://localhost:8080/simple-microservice/myservice/hello
+
