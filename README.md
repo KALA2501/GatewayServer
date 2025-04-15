@@ -1,6 +1,5 @@
-![Logo](https://github.com/FusionTech-2430/.github/blob/main/profile/Banner2.png?raw=true)
 
-# All Connected API Gateway
+# API Gateway
 
 Este proyecto es un API Gateway construido con **Spring Boot** y **Spring Cloud Gateway**. Su propósito es enrutar las solicitudes a varios microservicios dentro de una arquitectura de microservicios.
 
@@ -54,7 +53,3 @@ Para ejecutar el proyecto, utiliza el siguiente comando de Maven:
 ```sh
 mvn spring-boot:run
 ```
-
-## Autor 🧑🏻‍💻
-
-- [@alejandronoss1017](https://github.com/alejandronoss1017)
