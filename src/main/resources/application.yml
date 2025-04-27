@@ -1,17 +1,40 @@
 spring:
-  application:
-    name: api-gateway
   cloud:
-    config:
-      uri: http://config-server:8888
-      fail-fast: true
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://discovery-service:8761/eureka
-  instance:
-    prefer-ip-address: true
-server:
-  port: 8080
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origin-patterns:
+              - "http://localhost:3000"
+            allowed-methods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowed-headers: "*"
+            allow-credentials: true
+
+      routes:
+        - id: usuarios-service
+          uri: lb://usuarios-service
+          predicates:
+            - Path=/api/**
+
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      enabled: true
+    health:
+      show-details: always
