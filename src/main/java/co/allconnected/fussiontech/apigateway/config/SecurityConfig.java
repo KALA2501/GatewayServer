@@ -11,16 +11,10 @@ public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         return http
+            .headers(headers -> headers.frameOptions(frame -> frame.disable())) // 🔓 Permitir iframes
             .csrf(ServerHttpSecurity.CsrfSpec::disable)
-            .headers(headers -> headers.frameOptions(ServerHttpSecurity.HeaderSpec.FrameOptionsSpec::disable)) // ✅ Aquí quitamos X-Frame-Options
             .authorizeExchange(exchange -> exchange
-                .pathMatchers(
-                    "/api/juegos/games/**",
-                    "/api/juegos/send-metrics/**",
-                    "/actuator/**",
-                    "/eureka/**"
-                ).permitAll()
-                .anyExchange().authenticated()
+                .anyExchange().permitAll() // ✅ Todo permitido, sin token
             )
             .build();
     }
