@@ -10,7 +10,7 @@ public class FrameHeaderConfig {
     @Bean
     public WebFilter allowIframe() {
         return (exchange, chain) -> {
-            exchange.getResponse().getHeaders().remove("X-Frame-Options");
+            exchange.getResponse().getHeaders().remove("X-Frame-Options"); // 🧨 Fuerza su eliminación
             return chain.filter(exchange);
         };
     }

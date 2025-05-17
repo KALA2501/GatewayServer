@@ -11,12 +11,10 @@ public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         return http
-            .headers(headers -> headers
-                .frameOptions(frameOptions -> frameOptions.disable()) // ✅ Versión no deprecada
-            )
+            .headers(headers -> headers.frameOptions(frame -> frame.disable())) // 🔓 Permitir iframes
             .csrf(ServerHttpSecurity.CsrfSpec::disable)
             .authorizeExchange(exchange -> exchange
-                .anyExchange().permitAll()
+                .anyExchange().permitAll() // ✅ Todo permitido, sin token
             )
             .build();
     }
