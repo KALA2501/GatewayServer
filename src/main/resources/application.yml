@@ -16,7 +16,12 @@ spring:
         initial-interval: 1000
     gateway:
       httpserver:
-        max-header-size: 65536 
+        max-header-size: 65536
+  security:
+    headers:
+      frame:
+        options:
+          disable: true
 
 eureka:
   client:
