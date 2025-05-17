@@ -12,12 +12,9 @@ public class SecurityConfig {
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         return http
             .csrf(ServerHttpSecurity.CsrfSpec::disable)
-            .headers(headers -> headers
-                .frameOptions(frame -> frame.disable()) // ✅ 🔥 Aquí sí se desactiva correctamente
-            )
-            .authorizeExchange(exchanges -> exchanges
-                .anyExchange().permitAll()
-            )
+            .headers(headers -> headers.frameOptions(ServerHttpSecurity.HeaderSpec.FrameOptionsSpec::disable)) // ✅ esto es correcto
+            .authorizeExchange(exchange -> exchange.anyExchange().permitAll())
             .build();
     }
 }
+
